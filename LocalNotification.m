@@ -57,9 +57,10 @@
 
     for (UILocalNotification *notification in notifications) {
         NSString *notId = [notification.userInfo objectForKey:@"notificationId"];
-        if ([notificationId isEqualToString:notId]) {
-            [[UIApplication sharedApplication] cancelLocalNotification: notification];
+
+        if ([notificationId isEqual:notId]) {
             NSLog(@"Notification Canceled: %@", notificationId);
+            [[UIApplication sharedApplication] cancelLocalNotification: notification];
         }
     }
 }
