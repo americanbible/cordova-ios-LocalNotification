@@ -10,8 +10,7 @@
 
 @implementation LocalNotification
 
--(void)addNotification:(CDVInvokedUrlCommand*)command {
-
+- (void)addNotification:(CDVInvokedUrlCommand*)command {
     NSLog(@"AddNotification");
 
     NSMutableDictionary *repeatDict = [[NSMutableDictionary alloc] init];
@@ -49,7 +48,7 @@
 }
 
 - (void)cancelNotification:(CDVInvokedUrlCommand*)command {
-    
+
     NSString *notificationId = [command.arguments objectAtIndex:0];
     NSArray *notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
 

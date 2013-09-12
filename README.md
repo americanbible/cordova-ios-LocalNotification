@@ -1,8 +1,9 @@
 Cordova Local Notification Plugin
 =================================
 
-A Cordova 2.3.0+ plugin to create local notifications on iOs by Olivier Lesnicki.
+A Cordova 2.3.0+ plugin to create local notifications on iOs.
 
+Originally by Olivier Lesnicki.
 
 Installing the plugin
 ---------------------
@@ -29,29 +30,3 @@ In order to enable the notification listener we need to uncomment a number of li
 		 - (void)didReceiveLocalNotification:(NSNotification *)notification;
 
 8. Place your `.caf sound in your App `Resources` folder (not the `www` folder)
-
-
-Using the plugin
-----------------
-
-	// Schedules a local notification to be triggered after 5 seconds
-
-    window.addNotification({
-		fireDate        : Math.round(new Date().getTime()/1000 + 5),
-		alertBody       : "This is a local notification.",
-		repeatInterval  : "daily",
-		soundName       : "beep.caf",
-		badge           : 0,
-		notificationId  : 123,
-		callBack        : function(notificationId){ 
-			alert("Hello World! This alert was triggered by notification" + notificationId); 
-		}    		
-	});
-
-
-To Do
------
-
-- Implement badges (currently property is ignored)
-- JavaScript validation
-- Different callback if the app was in the background
