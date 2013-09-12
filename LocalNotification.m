@@ -72,13 +72,21 @@
 - (void)didReceiveLocalNotification:(NSNotification *)notification {
     NSLog(@"didReceiveLocalNotification");
 
-    UILocalNotification* notif  = [notification object];
+    UILocalNotification* notif = [notification object];
+
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+
+    NSString* stateStr = (state == UIApplicationStateActive ? @"active" : @"background");
 
     CDVPluginResult* pluginResult = nil;
-    NSString* javaScript          = nil;
+    NSString* javaScript = nil;
 
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: [notif.userInfo objectForKey:@"notificationId"]];
-    javaScript   = [pluginResult toSuccessCallbackString: [notif.userInfo objectForKey:@"callbackId"]];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:stateStr forKey:@"appState"];
+    [params setObject:[notif.userInfo objectForKey:@"notificationId"] forKey:@"notificationId"];
+
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:params];
+    javaScript = [pluginResult toSuccessCallbackString: [notif.userInfo objectForKey:@"callbackId"]];
 
     [self writeJavascript:javaScript];
 }
